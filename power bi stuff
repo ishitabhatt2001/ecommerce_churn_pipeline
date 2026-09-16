@@ -1,0 +1,52 @@
+Total Revenue = 
+CALCULATE(
+    SUM('staging transactions_clean'[line_revenue]),
+    'staging transactions_clean'[is_return] = FALSE()
+)
+
+At-Risk Revenue =
+CALCULATE(
+    SUM(customer_churn_scores[total_revenue]),
+    customer_churn_scores[churn_risk] = "High"
+)
+
+
+Health Score =
+DIVIDE(
+    [Total Revenue] - [At-Risk Revenue],
+    [Total Revenue],
+    0
+)
+
+Weekly Revenue =
+[Total Revenue]
+
+Newcolumn in powerbi for week start:
+
+Week Start =
+DateTable[Date] - WEEKDAY(DateTable[Date], 2) + 1
+
+
+Prior 4-Week Avg Revenue =
+VAR CurrentWeek =
+    MAX(DateTable[Week Start])
+VAR PreviousWeeks =
+    FILTER(
+        ALL(DateTable),
+        DateTable[Week Start] >= CurrentWeek - 28 &&
+        DateTable[Week Start] < CurrentWeek
+    )
+RETURN
+    CALCULATE(
+        [Total Revenue],
+        PreviousWeeks
+    ) / 4
+
+    
+
+High Risk Customer Count =
+CALCULATE(
+    DISTINCTCOUNT(customer_churn_scores[customer_id]),
+    customer_churn_scores[churn_risk] = "High"
+)
+

@@ -26,6 +26,10 @@ have data, then follow this guide.
    - `staging.quality_log`
 
 ## Step 2 — Build a date table (needed for the weekly trend)
+If invoice_date contains time values (e.g., 2023-05-10 14:30:00), it will fail to match DateTable[Date] (2023-05-10 00:00:00). Open Transform Data (Power Query), select staging transactions_clean, select invoice_date, and set its Data Type to Date (instead of Date/Time). Click Apply & Close.
+
+Verification: Place Total Revenue in a simple Card visual to confirm it displays a total monetary value instead of (Blank).
+
 
 Power BI needs an explicit date table to do week-over-week comparisons
 cleanly. In the **Modeling** tab → **New Table**, paste:
@@ -129,7 +133,8 @@ recruiters can see it without opening Power BI.
 
 ## Why have both dashboards?
 
-For a portfolio project, showing both signals range: Streamlit shows you can
+For a portfolio project, showing both signals range: 
+Streamlit shows you can
 build a data app in code (useful if the target role touches any
 Python/web work), while Power BI shows the more traditional BI-tool skillset
 many analyst job postings explicitly ask for. Mentioning "built dashboards in
