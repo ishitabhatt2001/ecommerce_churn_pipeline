@@ -5,3 +5,4 @@ __pycache__/
 raw/*.csv
 logs/*.log
 .DS_Store
+.streamlit/secrets.toml
