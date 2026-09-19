@@ -1,5 +1,5 @@
 # E-commerce Sales & Churn Analytics Pipeline
-
+[Click here for live link](https://ecommercechurnpipeline-yev74phhy98x2f49hgtmxh.streamlit.app)
 ## Business Problem
 
 Business stakeholders currently pull sales numbers manually every Monday and
